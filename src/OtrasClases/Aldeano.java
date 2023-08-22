@@ -1,6 +1,5 @@
 package OtrasClases;
 import java.util.concurrent.*;
-import Acciones.*;
 
 import Acciones.Accion;
 public class Aldeano implements Callable {
