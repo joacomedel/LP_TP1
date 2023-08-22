@@ -7,8 +7,8 @@ public class Aldeano implements Callable {
     private int energia;
     private Canasta canasta;
     private Accion accion;
-    public  Aldeano() {
-
+    public  Aldeano(int energia) {
+        this.energia = energia;
     }
     public void setEnergia(int energia) {
         this.energia = energia;

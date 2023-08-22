@@ -3,9 +3,6 @@ import java.util.concurrent.*;
 import OtrasClases.Aldeano;
 
 
-public class Accion {
-
-    public  Object ejecutar(Aldeano aldeano) {
-        return 0;
-    }
+public interface Accion {
+    public  Object ejecutar(Aldeano aldeano);
 }
