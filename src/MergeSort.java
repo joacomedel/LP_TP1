@@ -1,7 +1,5 @@
-
 public class MergeSort implements AlgoritmoOrdenamiento {
-
-    public static <T extends Comparable<T>> int[] ordenar(int[] arreglo) {
+    public  int[] ordenar(int[] arreglo) {
         int[] arregloRetornar;
         if (arreglo == null || arreglo.length <= 1) {
             arregloRetornar = null;
@@ -12,7 +10,7 @@ public class MergeSort implements AlgoritmoOrdenamiento {
         return arregloRetornar;
     }
 
-   public static void mergeSort(int[] arreglo, int inicio, int fin) {
+   private void mergeSort(int[] arreglo, int inicio, int fin) {
         int medio = (fin+inicio) / 2;
         if (inicio+1>=fin) {
         }else{
@@ -23,7 +21,7 @@ public class MergeSort implements AlgoritmoOrdenamiento {
         
     }
 
-    public  static void merge(int[] arregloOriginal, int inicio, int medio, int fin) {
+    private void merge(int[] arregloOriginal, int inicio, int medio, int fin) {
         int[] arregloClon = clonRango(arregloOriginal, inicio, fin);
         int indIzq = 0;
         int finClon = arregloClon.length;
@@ -56,7 +54,7 @@ public class MergeSort implements AlgoritmoOrdenamiento {
         }
     }
 
-    public static  int[] clonRango(int[] arreglo, int inicio, int fin) {
+    private int[] clonRango(int[] arreglo, int inicio, int fin) {
         // Ingresa un arreglo con un rango , devuelve un clon del arreglo con el rango
         // de esos valores
         int length = fin - inicio  ;

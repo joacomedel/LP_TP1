@@ -1,5 +1,3 @@
 public interface AlgoritmoOrdenamiento {
-    public static <T extends Comparable<T>> T[] ordenar(T[] arregloOriginal){
-        return null;
-    };
+    public int[] ordenar(int[] arregloOriginal);
 }
