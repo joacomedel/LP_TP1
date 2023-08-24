@@ -14,41 +14,43 @@ public class MergeSort implements AlgoritmoOrdenamiento {
 
    public static void mergeSort(int[] arreglo, int inicio, int fin) {
         int medio = (fin+inicio) / 2;
-        if (inicio==fin) {
+        if (inicio+1>=fin) {
         }else{
             mergeSort(arreglo, inicio, medio);
-            mergeSort(arreglo, medio+1, fin);
+            mergeSort(arreglo, medio, fin);
             merge(arreglo, inicio, medio, fin);
         }
         
     }
 
     public  static void merge(int[] arregloOriginal, int inicio, int medio, int fin) {
-        int[] arregloIzq = clonRango(arregloOriginal, inicio, medio+1);
-        int[] arregloDer = clonRango(arregloOriginal, medio+1 , fin+1);
+        int[] arregloClon = clonRango(arregloOriginal, inicio, fin);
         int indIzq = 0;
-        int indDer = 0;
+        int finClon = arregloClon.length;
+        int medioClon = finClon/2;
+        int indDer = medioClon;
+        
         int indOriginal = inicio;
-        while (indIzq < arregloIzq.length && indDer < arregloDer.length) {
-            if (arregloIzq[indIzq]>arregloDer[indDer]) {
-                arregloOriginal[indOriginal] = arregloIzq[indIzq];
+        while (indIzq < medioClon && indDer < finClon) {
+            if (arregloClon[indIzq]>arregloClon[indDer]) {
+                arregloOriginal[indOriginal] = arregloClon[indIzq];
                 indIzq++;
                 indOriginal++;
             } else {
-                arregloOriginal[indOriginal] = arregloDer[indDer];
+                arregloOriginal[indOriginal] = arregloClon[indDer];
                 indDer++;
                 indOriginal++;
             }
         }
-        while (indIzq < arregloIzq.length) {
+        while (indIzq < medioClon) {
             //Si no termine de copiar el arregloIzq lo termino de copiar
-            arregloOriginal[indOriginal] = arregloIzq[indIzq];
+            arregloOriginal[indOriginal] = arregloClon[indIzq];
             indIzq++;
             indOriginal++;
         }
-        while (indDer < arregloDer.length) {
+        while (indDer < finClon) {
             //Si no termine de copiar el arregloDer lo termino de copiar
-            arregloOriginal[indOriginal] = arregloDer[indDer];
+            arregloOriginal[indOriginal] = arregloClon[indDer];
             indDer++;
             indOriginal++;
         }

@@ -1,6 +1,6 @@
 public class app {
     public static void main(String[] args) {
-        int[] arreglo = {2,4,8,9};
+        int[] arreglo = {10,4,8,9,5};
         int [] arregloOrdenado = MergeSort.ordenar(arreglo);
         mostrarArreglo(arregloOrdenado);
     }
