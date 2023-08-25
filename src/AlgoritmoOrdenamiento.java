@@ -1,3 +1,3 @@
 public interface AlgoritmoOrdenamiento {
-    public int[] ordenar(int[] arregloOriginal);
+    public Object[] ordenar(Object[] arregloOriginal);
 }
