@@ -37,7 +37,7 @@ public class MergeSort<T extends Comparable<T>> implements AlgoritmoOrdenamiento
         int k = left;
         
         while (i < n1 && j < n2) {
-            if (((T) leftArr[i]).compareTo((T) rightArr[j]) > 0) {
+            if (((T) leftArr[i]).compareTo((T) rightArr[j]) <= 0) {
                 arr[k] = (T) leftArr[i];
                 i++;
             } else {
