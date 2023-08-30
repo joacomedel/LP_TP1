@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 public class ConcurrentSort<T extends Comparable<T>> {
     
     private final ExecutorService executor = Executors.newFixedThreadPool(5);
-    private Collection<Callable<T[]>> callables;
+    private Collection<Callable<Arreglo<T>>> callables;
 
     public T[] sort(T[] array) throws InterruptedException, ExecutionException
     {
@@ -17,9 +17,10 @@ public class ConcurrentSort<T extends Comparable<T>> {
         callables.add(new Ordenador<T>(new BubbleSort<T>(), array.clone()));
         callables.add(new Ordenador<T>(new MergeSort<T>(), array.clone()));
         callables.add(new Ordenador<T>(new QuickSort<T>(), array.clone()));
-
-        T[] result = executor.invokeAny(callables);
-
+        
+        Arreglo<T> arreglo = executor.invokeAny(callables);
+        System.out.println(arreglo.getNombre());
+        T[] result = arreglo.getArreglo();
         executor.shutdown();
 
         return result;
