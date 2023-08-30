@@ -1,69 +1,62 @@
-public class MergeSort implements AlgoritmoOrdenamiento {
-    public  int[] ordenar(int[] arreglo) {
-        int[] arregloRetornar;
-        if (arreglo == null || arreglo.length <= 1) {
-            arregloRetornar = null;
-        } else {
-            arregloRetornar = arreglo.clone();
-            mergeSort(arregloRetornar, 0, arreglo.length);
-        }
-        return arregloRetornar;
+
+public class MergeSort<T extends Comparable<T>> implements AlgoritmoOrdenamiento<T> {
+
+    public T[] ordenar(T[] array) 
+    {
+        mergeSort(array, 0, array.length - 1);
+        return array;
     }
 
-   private void mergeSort(int[] arreglo, int inicio, int fin) {
-        int medio = (fin+inicio) / 2;
-        if (inicio+1>=fin) {
-        }else{
-            mergeSort(arreglo, inicio, medio);
-            mergeSort(arreglo, medio, fin);
-            merge(arreglo, inicio, medio, fin);
+    public void mergeSort(T[] arr, int left, int right) 
+    {
+        if (left < right) 
+        {
+            int middle = left + (right - left) / 2;
+            mergeSort(arr, left, middle);
+            mergeSort(arr, middle + 1, right);
+            merge(arr, left, middle, right);
         }
-        
     }
 
-    private void merge(int[] arregloOriginal, int inicio, int medio, int fin) {
-        int[] arregloClon = clonRango(arregloOriginal, inicio, fin);
-        int indIzq = 0;
-        int finClon = arregloClon.length;
-        int medioClon = finClon/2;
-        int indDer = medioClon;
+    @SuppressWarnings("unchecked")
+    public void merge(T[] arr, int left, int middle, int right) {
+        int n1 = middle - left + 1;
+        int n2 = right - middle;
+
+        Object[] leftArr = new Object[n1];
+        Object[] rightArr = new Object[n2];
+
+        for (int i = 0; i < n1; i++)
+            leftArr[i] = arr[left + i];
         
-        int indOriginal = inicio;
-        while (indIzq < medioClon && indDer < finClon) {
-            if (arregloClon[indIzq]>arregloClon[indDer]) {
-                arregloOriginal[indOriginal] = arregloClon[indIzq];
-                indIzq++;
-                indOriginal++;
+        for (int j = 0; j < n2; j++) 
+            rightArr[j] = arr[middle + 1 + j];
+        
+
+        int i = 0, j = 0;
+        int k = left;
+        
+        while (i < n1 && j < n2) {
+            if (((T) leftArr[i]).compareTo((T) rightArr[j]) > 0) {
+                arr[k] = (T) leftArr[i];
+                i++;
             } else {
-                arregloOriginal[indOriginal] = arregloClon[indDer];
-                indDer++;
-                indOriginal++;
+                arr[k] = (T) rightArr[j];
+                j++;
             }
+            k++;
         }
-        while (indIzq < medioClon) {
-            //Si no termine de copiar el arregloIzq lo termino de copiar
-            arregloOriginal[indOriginal] = arregloClon[indIzq];
-            indIzq++;
-            indOriginal++;
+
+        while (i < n1) {
+            arr[k] = (T) leftArr[i];
+            i++;
+            k++;
         }
-        while (indDer < finClon) {
-            //Si no termine de copiar el arregloDer lo termino de copiar
-            arregloOriginal[indOriginal] = arregloClon[indDer];
-            indDer++;
-            indOriginal++;
+
+        while (j < n2) {
+            arr[k] = (T) rightArr[j];
+            j++;
+            k++;
         }
     }
-
-    private int[] clonRango(int[] arreglo, int inicio, int fin) {
-        // Ingresa un arreglo con un rango , devuelve un clon del arreglo con el rango
-        // de esos valores
-        int length = fin - inicio  ;
-        int[] arregloRetornar = new int[length];
-        int i = 0;
-        while (i<length) {
-            arregloRetornar[i] = arreglo[inicio+i];
-            i++;
-        }
-        return arregloRetornar;
-    };
 }

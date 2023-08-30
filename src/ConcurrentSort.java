@@ -15,9 +15,10 @@ public class ConcurrentSort<T extends Comparable<T>> {
         callables = new ArrayList<>();
 
         callables.add(new Ordenador<T>(new BubbleSort<T>(), array.clone()));
+        callables.add(new Ordenador<T>(new MergeSort<T>(), array.clone()));
 
         T[] result = executor.invokeAny(callables);
-        
+
         executor.shutdown();
 
         return result;
