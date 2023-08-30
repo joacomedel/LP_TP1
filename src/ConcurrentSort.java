@@ -10,7 +10,7 @@ public class ConcurrentSort<T extends Comparable<T>> {
     private final ExecutorService executor = Executors.newFixedThreadPool(5);
     private Collection<Callable<T[]>> callables;
 
-    public T[] sort(T[] array) throws InterruptedException, ExecutionException
+    public void sort(T[] array) throws InterruptedException, ExecutionException
     {
         callables = new ArrayList<>();
 
@@ -21,8 +21,7 @@ public class ConcurrentSort<T extends Comparable<T>> {
         T[] result = executor.invokeAny(callables);
 
         executor.shutdown();
-
-        return result;
+        System.arraycopy(array, 0, result, 0, array.length);
     }
 
 }
