@@ -1,6 +1,6 @@
-public class QuickSort<T extends Comparable<T>> implements AlgoritmoOrdenamiento<T> {
+public class QuickSort<T extends Comparable<T>> extends StrategySort<T> {
     
-    public T[] ordenar(T[] arregloOriginal) 
+    protected T[] ordenar(T[] arregloOriginal) 
     {
         quickSort(arregloOriginal, 0, arregloOriginal.length - 1);
         return arregloOriginal;

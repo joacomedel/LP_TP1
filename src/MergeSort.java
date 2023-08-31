@@ -1,7 +1,7 @@
 
-public class MergeSort<T extends Comparable<T>> implements AlgoritmoOrdenamiento<T> {
+public class MergeSort<T extends Comparable<T>> extends StrategySort<T> {
 
-    public T[] ordenar(T[] array) 
+    protected T[] ordenar(T[] array) 
     {
         mergeSort(array, 0, array.length - 1);
         return array;

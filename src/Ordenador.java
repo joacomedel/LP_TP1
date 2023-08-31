@@ -1,17 +1,17 @@
 import java.util.concurrent.Callable;
 
-public class Ordenador<T> implements Callable<T[]> {
+public class Ordenador<T> implements Callable<Arreglo<T>> {
 
-    private AlgoritmoOrdenamiento<T> algoritmo;
+    private StrategySort<T> algoritmo;
     private T[] arreglo;
 
-    public Ordenador (AlgoritmoOrdenamiento<T> algoritmo, T[] arreglo){
+    public Ordenador (StrategySort<T> algoritmo, T[] arreglo){
         this.algoritmo = algoritmo;
         this.arreglo = arreglo;
 
     }
     @Override
-    public T[] call() throws Exception {
-        return algoritmo.ordenar(arreglo);
+    public Arreglo<T> call() throws Exception {
+        return algoritmo.sort(arreglo);
     }
 }
