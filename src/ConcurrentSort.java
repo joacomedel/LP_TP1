@@ -27,7 +27,5 @@ public class ConcurrentSort<T extends Comparable<T>> {
         System.arraycopy(result, 0, array, 0, array.length);
  
         executor.shutdownNow();
-
-        return result;
     }
 }
