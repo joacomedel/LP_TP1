@@ -13,8 +13,10 @@ public class ConcurrentSort<T extends Comparable<T>> {
     private Collection<Callable<Arreglo<T>>> callables;
 
 
-    public void sort(T[] array) throws InterruptedException, ExecutionException, TimeoutException
+    public String sort(T[] array) throws InterruptedException, ExecutionException, TimeoutException
     {
+        //retorna el nombre de la estrategia que termino 
+        
         callables = new ArrayList<>();
 
         callables.add(new Ordenador<T>(new BubbleSort<T>(), array.clone()));
@@ -22,10 +24,10 @@ public class ConcurrentSort<T extends Comparable<T>> {
         callables.add(new Ordenador<T>(new QuickSort<T>(), array.clone()));
 
         Arreglo<T> arreglo = executor.invokeAny(callables);
-        System.out.println(arreglo.getNombre());
         T[] result = arreglo.getArreglo();
         System.arraycopy(result, 0, array, 0, array.length);
  
         executor.shutdownNow();
+        return arreglo.getNombre();
     }
 }
