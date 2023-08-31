@@ -4,13 +4,14 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeoutException;
 
 public class ConcurrentSort<T extends Comparable<T>> {
     
-    private final ExecutorService executor = Executors.newFixedThreadPool(5);
+    private final ExecutorService executor = Executors.newFixedThreadPool(3);
     private Collection<Callable<T[]>> callables;
 
-    public void sort(T[] array) throws InterruptedException, ExecutionException
+    public void sort(T[] array) throws InterruptedException, ExecutionException, TimeoutException
     {
         callables = new ArrayList<>();
 
@@ -19,9 +20,9 @@ public class ConcurrentSort<T extends Comparable<T>> {
         callables.add(new Ordenador<T>(new QuickSort<T>(), array.clone()));
 
         T[] result = executor.invokeAny(callables);
-
-        executor.shutdown();
-        System.arraycopy(array, 0, result, 0, array.length);
+        System.arraycopy(result, 0, array, 0, array.length);
+ 
+        executor.shutdownNow();
+     //   executor.shutdownNow();
     }
-
 }
