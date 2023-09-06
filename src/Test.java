@@ -5,6 +5,7 @@ import java.util.concurrent.TimeoutException;
 public class Test {
 
     private static final Random random = new Random();
+    private static final ConcurrentSort<Integer> concurrentSort = new ConcurrentSort<>();
 
     // Retorna un arreglo de tamaño n con numeros aleatorios
     static private Integer[] randomArray(int n)
@@ -27,7 +28,6 @@ public class Test {
     {
         System.out.printf("Para un arreglo de %d elementos...", x);
         Integer[] array = randomArray(x);
-        ConcurrentSort<Integer> concurrentSort = new ConcurrentSort<>();
         concurrentSort.setModeQuadratic();
         String strategy = concurrentSort.sort(array);
 
