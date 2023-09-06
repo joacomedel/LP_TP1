@@ -9,20 +9,40 @@ import java.util.concurrent.TimeoutException;
 public class ConcurrentSort<T extends Comparable<T>> {
     
 
-    private final ExecutorService executor = Executors.newFixedThreadPool(5);
-    private Collection<Callable<Arreglo<T>>> callables;
+    private Collection<Ordenador<T>> callables;
 
-
+    public ConcurrentSort(){
+        callables = new ArrayList<>();
+        callables.add(new Ordenador<T>());
+        callables.add(new Ordenador<T>());
+        callables.add(new Ordenador<T>());
+    }
+    public void setModoCasiOrdenado(){
+        var it = callables.iterator();
+        //it.next().setAlgoritmo();
+        //it.next().setAlgoritmo();
+        //it.next().setAlgoritmo();
+    }
+    public void setModoCuadrado(){
+        var it = callables.iterator();
+        //it.next().setAlgoritmo();
+        //it.next().setAlgoritmo();
+        //it.next().setAlgoritmo();
+    }
+    public void setModoLog(){
+        var it = callables.iterator();
+        //it.next().setAlgoritmo();
+        //it.next().setAlgoritmo();
+        //it.next().setAlgoritmo();
+    }
     public String sort(T[] array) throws InterruptedException, ExecutionException, TimeoutException
     {
-        //retorna el nombre de la estrategia que termino 
-        
-        callables = new ArrayList<>();
-
-        callables.add(new Ordenador<T>(new BubbleSort<T>(), array.clone()));
-        callables.add(new Ordenador<T>(new MergeSort<T>(), array.clone()));
-        callables.add(new Ordenador<T>(new QuickSort<T>(), array.clone()));
-
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+        var it = callables.iterator();
+        int tamaño = callables.size();
+        for (int i = 0; i < tamaño; i++) {
+            it.next().setArreglo(array);
+        }
         Arreglo<T> arreglo = executor.invokeAny(callables);
         T[] result = arreglo.getArreglo();
         System.arraycopy(result, 0, array, 0, array.length);
