@@ -65,7 +65,7 @@ public class ConcurrentSort<T extends Comparable<T>> {
         var it = callables.iterator();
 
         while(it.hasNext())
-            it.next().setArreglo(array);
+            it.next().setArreglo(array.clone());
 
         Arreglo<T> arreglo = executor.invokeAny(callables);
         T[] result = arreglo.getArreglo();

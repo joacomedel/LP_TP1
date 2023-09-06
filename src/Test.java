@@ -28,6 +28,7 @@ public class Test {
         System.out.printf("Para un arreglo de %d elementos...", x);
         Integer[] array = randomArray(x);
         ConcurrentSort<Integer> concurrentSort = new ConcurrentSort<>();
+        concurrentSort.setModeQuadratic();
         String strategy = concurrentSort.sort(array);
 
         System.out.printf("\nSe ordeno? %s\n", isOrdered(array) ? "SI" : "NO");
