@@ -5,13 +5,21 @@ public class Ordenador<T> implements Callable<Arreglo<T>> {
     private StrategySort<T> algoritmo;
     private T[] arreglo;
 
-    public Ordenador (StrategySort<T> algoritmo, T[] arreglo){
-        this.algoritmo = algoritmo;
-        this.arreglo = arreglo;
+    public Ordenador (){
 
+    }
+    public void setAlgoritmo(StrategySort<T> algoritmo) {
+        this.algoritmo = algoritmo;
+    }
+    public void setArreglo(T[] arreglo) {
+        this.arreglo = arreglo;
     }
     @Override
     public Arreglo<T> call() throws Exception {
-        return algoritmo.sort(arreglo);
+        Arreglo<T> retornar = null;
+        if(arreglo != null && algoritmo != null){
+            retornar = algoritmo.sort(arreglo);
+        }
+        return retornar;
     }
 }
